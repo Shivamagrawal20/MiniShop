@@ -1,19 +1,27 @@
 import { Product } from '../types';
 
-// In-memory storage
-let products: Product[] = [];
-let nextId = 1;
+const API_URL = 'http://localhost:3000/api';
 
 export const fetchAllProducts = async (): Promise<Product[]> => {
-  return products;
+  const response = await fetch(`${API_URL}/products`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch products');
+  }
+  return response.json();
 };
 
 export const createProduct = async (product: Product): Promise<Product> => {
-  const newProduct = {
-    ...product,
-    id: nextId++,
-    created_at: new Date().toISOString()
-  };
-  products.push(newProduct);
-  return newProduct;
+  const response = await fetch(`${API_URL}/products`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(product),
+  });
+  
+  if (!response.ok) {
+    throw new Error('Failed to create product');
+  }
+  
+  return response.json();
 };
