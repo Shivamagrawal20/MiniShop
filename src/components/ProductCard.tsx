@@ -22,7 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         />
         <div className="absolute bottom-0 right-0 bg-primary-600 text-white px-3 py-1.5 text-sm font-bold rounded-tl-md flex items-center">
           <DollarSign className="h-3.5 w-3.5 mr-1" />
-          {product.price.toFixed(2)}
+          {Number(product.price).toFixed(2)}
         </div>
       </div>
       
