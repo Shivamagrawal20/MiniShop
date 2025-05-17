@@ -14,4 +14,5 @@ export interface ProductContextType {
   fetchProducts: () => Promise<void>;
   addProduct: (product: Product) => Promise<boolean>;
   searchProducts: (query: string) => void;
+  removeProduct: (id: number) => Promise<boolean>;
 }

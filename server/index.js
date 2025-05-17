@@ -76,6 +76,17 @@ app.post('/api/products', async (req, res) => {
   }
 });
 
+app.delete('/api/products/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const result = await pool.query('DELETE FROM products WHERE id = $1 RETURNING *', [id]);
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    res.status(500).json({ error: 'Failed to delete product' });
+  }
+});
+
 // Start server
 app.listen(PORT, async () => {
   await initDatabase();

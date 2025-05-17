@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import { Product, ProductContextType } from '../types';
-import { fetchAllProducts, createProduct } from '../services/api';
+import { fetchAllProducts, createProduct, deleteProduct } from '../services/api';
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
@@ -69,6 +69,19 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
     setFilteredProducts(filtered);
   };
 
+  const removeProduct = async (id: number): Promise<boolean> => {
+    try {
+      await deleteProduct(id);
+      setProducts((prev) => prev.filter((product) => product.id !== id));
+      setFilteredProducts((prev) => prev.filter((product) => product.id !== id));
+      return true;
+    } catch (err) {
+      setError('Failed to delete product');
+      console.error(err);
+      return false;
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -79,7 +92,8 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
     error,
     fetchProducts,
     addProduct,
-    searchProducts
+    searchProducts,
+    removeProduct
   };
 
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>;

@@ -48,3 +48,20 @@ export const createProduct = async (product: Product): Promise<Product> => {
     throw error;
   }
 };
+
+export const deleteProduct = async (id: number): Promise<void> => {
+  try {
+    const response = await fetch(`${API_URL}/products/${id}`, {
+      method: 'DELETE',
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Error response:', errorText);
+      throw new Error(`Failed to delete product: ${response.status} ${errorText}`);
+    }
+  } catch (error) {
+    console.error('Error in deleteProduct:', error);
+    throw error;
+  }
+};
