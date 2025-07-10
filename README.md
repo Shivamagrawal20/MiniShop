@@ -21,28 +21,42 @@ A simple e-commerce web application with two main tabs — one for submitting pr
 ### Prerequisites
 
 - Node.js (v14+)
-- PostgreSQL database
+- PostgreSQL database (running and accessible)
 
-### Backend Setup
+### Backend Setup (in `server/` directory)
 
-1. Clone this repository
-2. Copy `.env.example` to `.env` and update the database credentials:
+1. **Install dependencies:**
+   ```
+   cd server
+   npm install
+   ```
+2. **Create a `.env` file** in the `server/` directory with the following variables (edit as needed):
    ```
    DB_HOST=localhost
    DB_PORT=5432
    DB_USER=your_username
    DB_PASSWORD=your_password
    DB_NAME=ecommerce
+   PORT=3000
    ```
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Start the server:
-   ```
-   npm run server
-   ```
-   The server runs on http://localhost:3000 by default
+   > **Note:** There is no `.env.example` file provided. You must create `.env` manually.
+3. **Start the backend server:**
+   - For development (with auto-reload):
+     ```
+     npm run dev
+     ```
+   - For production:
+     ```
+     npm start
+     ```
+   The server runs on [http://localhost:3000](http://localhost:3000) by default.
+4. **Database Initialization:**
+   - On first run, the server will automatically create the `products` table if it does not exist.
+   - Ensure your PostgreSQL instance is running and accessible with the credentials you provided.
+
+**Troubleshooting:**
+- If you see database connection errors, double-check your `.env` credentials and that PostgreSQL is running.
+- The backend logs errors to the console for easier debugging.
 
 ### Frontend Setup
 
