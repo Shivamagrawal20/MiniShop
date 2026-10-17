@@ -41,8 +41,8 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
     try {
       setLoading(true);
       const newProduct = await createProduct(product);
-      setProducts((prev) => [...prev, newProduct]);
-      setFilteredProducts((prev) => [...prev, newProduct]);
+      setProducts((prev) => [newProduct, ...prev]);
+      setFilteredProducts((prev) => [newProduct, ...prev]);
       return true;
     } catch (err) {
       setError('Failed to add product');

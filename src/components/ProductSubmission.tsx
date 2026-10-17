@@ -45,7 +45,7 @@ const ProductSubmission: React.FC = () => {
     try {
       new URL(url);
       return true;
-    } catch (e) {
+    } catch {
       return false;
     }
   };
@@ -83,7 +83,7 @@ const ProductSubmission: React.FC = () => {
       } else {
         toast.error('Failed to add product. Please try again.');
       }
-    } catch (error) {
+    } catch {
       toast.error('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);

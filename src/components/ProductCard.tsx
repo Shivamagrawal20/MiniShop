@@ -23,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         } else {
           toast.error('Failed to delete product');
         }
-      } catch (error) {
+      } catch {
         toast.error('An error occurred while deleting the product');
       }
     }
